@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+	<meta charset="UTF-8">
+	<title></title> 
+	<meta name="viewport" content="width=device-width, user-scalable=yes, initial-scale=1.0, maximum-scale=3.0, minimum-scale=1.0">
+   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+   <script src="https://kit.fontawesome.com/848249e791.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="css/styles_login.css">
+	
+
+</head>  
+<body>
+   <div class="back-button">
+      <a type="link" href="/" id="back-arrow"><i class="fa-solid fa-arrow-left"></i> Inicio </a>
+      </div>
+ <form class="formulario" method="POST" action="/register" novalidate>
+    
+    <h1>CREAR USUARIO</h1>
+     <div class="contenedor">
+     
+     <div class="input-contenedor">
+         <i class="fas fa-user icon"></i>
+         <input type="text" placeholder="Nombre" name="nombre" id="name" 
+         value="<%= locals.oldData ? oldData.nombre : null %>">
+         <% if (locals.errors && errors.nombre){ %>
+            <div class="text-danger"><%= errors.nombre.msg %></div>
+            <% } %>
+      </div>
+
+      <div class="input-contenedor">
+         <i class="fas fa-user icon"></i>
+         <input type="text"  placeholder="Apellido" name="apellido" id="apellido"
+         value="<%= locals.oldData ? oldData.apellido : null %>">
+         <% if (locals.errors && errors.apellido){ %>
+            <div class="text-danger"><%= errors.apellido.msg %></div>
+            <% } %>
+      </div>
+         
+         <div class="input-contenedor">
+         <i class="fas fa-envelope icon"></i>
+         <input type="text" placeholder="Correo Electronico" name="email" id="email"
+         value="<%= locals.oldData ? oldData.email : null %>">
+         <% if (locals.errors && errors.email){ %>
+            <div ><%= errors.email.msg %></div>
+            <% } %>
+         
+         </div>
+         
+         <div class="input-contenedor">
+            <i class="fas fa-key icon"></i>
+            <input type="password" placeholder="Contraseña" name="password" id="password"
+            value="<% locals.oldData && oldData.password ? oldData.password : null %>">
+             
+            <% if (locals.errors && errors.password) { %>
+               <div> <%= errors.password.msg %></div>
+            <% } %>
+            
+         </div>
+         <div class="input-contenedor">
+            <i class="fas fa-key icon"></i>
+            <input type="password" placeholder="Repetir contraseña">
+         </div>
+
+         <input type="submit" value="Registrate" class="button">
+         <p>Ya tengo usuario, <a href="/login" class="link"> Iniciar Sesión</a></p>
+     </div>
+    </form>
+</body>
+</html>

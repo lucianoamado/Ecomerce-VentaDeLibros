@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <script src="https://kit.fontawesome.com/848249e791.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/css/styles_login.css">
+    <title>Editar producto</title>
+</head>
+<body>
+    <div class="back-button">
+        <a type="link" href="/" id="back-arrow"><i class="fa-solid fa-arrow-left"></i> Inicio </a>
+    </div>
+    <form action="/products/<%= productToEdit.id %>?_method=PUT" method="POST" class="formulario" enctype="multipart/form-data">
+        
+        <h1>Editar Producto</h1>
+        <div class="errores">
+            <ul></ul>
+        </div>
+        <% if (locals.errors) { %>
+            <ul class="feedback-list">
+                <% if (locals.errors.titulo) { %>
+                    <li class="feedback"><%= locals.errors.titulo.msg %></li>
+                <% } %>
+                <% if (locals.errors.descripcion) { %>
+                    <li class="feedback"><%= locals.errors.descripcion.msg %></li>
+                <% } %>
+                <% if (locals.errors.image) { %>
+                    <li class="feedback"><%= locals.errors.image.msg %></li>
+                <% } %>
+            </ul>
+        <% } %>
+        <div class="contenedor">
+            <div class="input-contenedor">
+                <i class="fa-solid fa-book icon"></i>
+                <input type="text" id="titulo" name="titulo" placeholder="Título del libro" value="<%= productToEdit.titulo %>">
+            </div>
+            <span id="mensajeTitulo" class="mensaje-error">Título debe tener al menos 5 caracteres</span>
+            <div class="input-contenedor">
+                <i class="fa-solid fa-user-tie icon"></i>
+                <input type="text" name="autor" placeholder="Autor" value="<%= productToEdit.autor.nombre %>">
+            </div>
+            <div class="input-contenedor">
+                <i class="fa-solid fa-book icon"></i>
+                <input type="text" name="descripcion" id="descripcion" placeholder="Descripción del libro" value="<%= productToEdit.descripcion %>">
+            </div>
+            <span id="mensajeDescripcion" class="mensaje-error">Debe tener al menos 20 caracteres</span>
+            <!-- <div class="input-contenedor">
+                <i class="fa-solid fa-industry icon"></i>
+                <input type="text" name="editorial" placeholder="Editorial" value="<%= productToEdit.editorial %>">
+            </div> -->
+            <!-- <div class="input-contenedor">
+                <i class="fa-solid fa-book-open icon"></i>
+                <input type="number" name="numberPages" placeholder="Cantidad de páginas" value="<%= productToEdit.numberPages %>">
+            </div> -->
+
+            <div class="input-contenedor">
+                <i class="fa-solid fa-masks-theater icon"></i>
+                <label for="genero" id="genero">Seleccionar género:</label>
+                <select name="genero" id="gender">
+                    
+                    <% genders.forEach(gender => { %>
+                        
+                    <option <% if (productToEdit.genero.nombre == gender.value) { %>
+                        <%= 'selected' %><% }; %> value="<%= gender.value %>"><%= gender.label %></option>
+                    <% }); %>
+                </select>
+
+             
+
+            </div>
+
+            <div class="input-contenedor">
+                <i class="fa-solid fa-dollar-sign icon"></i>
+                <input type="number" name="precio" placeholder="Precio de venta" value="<%= productToEdit.precio %>">
+            </div>
+            <label>Seleccione imagen de portada:</label>
+            
+            <div class="input-contenedor">
+                <input type="file" name="image" accept=".jpg, .png, .jpeg">
+                
+            </div>
+
+            <p style="text-align: left;">Portada actual:</p>
+            <div class="portada-padre">
+                <img src="<%= productToEdit.portada %>" class="portada">
+            </div>
+            <input type="submit" value="Editar" class="button">
+            <br>
+        </div>
+    </form>
+    <script src="/js/forms.js"></script>
+</body>
+</html>

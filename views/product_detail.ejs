@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= `${product.titulo} - ${product.autor.nombre}` %>
+    </title>
+    <link rel="stylesheet" href="/css/product_detail.css">
+    <script src="https://kit.fontawesome.com/25a3935e62.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <!-- header Mobil + desktop -->
+
+    <%- include('partials/header.ejs') %>
+
+        <div class="container flex">
+            <div class="btn-back">
+                <i class="fa-solid fa-arrow-left"></i>Inicio
+            </div>
+            <div class="img-book">
+                <img src="<%= product.portada %>" alt="portada de libro">
+            </div>
+            <div class="info">
+                <h1>
+                    <%= product.titulo %>
+                </h1>
+<!-- 
+                <p class="book-title-product">
+                </p> -->
+                <p class="book-author"><%= product.autor.nombre %></p>
+                <p class="book-price">$<%= product.precio %></p>
+                <div class="btn-quantity">
+                    <button type="button" class="btn-mas"><i class="fa-solid fa-minus"></i></button>
+                    <p class="num-btn">3</p>
+                    <button type="button" class="btn-menos"><i class="fa-solid fa-plus"></i></button>
+                </div>
+                <div class="buttons">
+                    <a class="action-button edit" href="/products/<%= product.id %>/edit" class="edit">Editar producto</a>
+                    <form action="/products/<%= product.id %>?_method=DELETE" method="post">
+                        <button class="action-button delete">Eliminar producto</button>
+                    </form>
+
+                </div>
+
+                <button type="submit" class="btn-carrito">Carrito</button>
+            </div>
+
+        </div>
+
+        <div class="container">
+            <ul class="nav-detail">
+                <li class="">Descripción</li>
+                <li class="active">Detalle</li>
+            </ul>
+            <div class="details-container">
+                <div class="description" id="description">
+                    <div>
+                        <h4>Sinopsis:</h4>
+                        <p>
+                            <%= product.descripcion %>
+                        </p>
+                    </div>
+                    <!-- <div>
+                            <h4>Contenido:</h4>
+                            <ol>
+                                <li>Prefacio por J.K. Rowling</li>
+                                <li>Capítulo 1: El regreso al Hogwarts</li>
+                                <li>Capítulo 2: La torre de Hagrid</li>
+                                <li>Capítulo 3: Los profesores vuelven a su casa</li>
+                                <li>Capítulo 4: La cena con Dumbledore</li>
+                                <li>Capítulo 5: El secreto de las escaleras secretas</li>
+                                <li>Capítulo 6: El jardín de magia</li>
+                                <li>Capítulo 7: El castillo de Hogwarts</li>
+                                <li>Capítulo 8: La biblioteca de Hogwarts</li>
+
+                            </ol>
+                        </div> -->
+                </div>
+                <div class="detail" id="detail">
+                    <ol>
+                        <!-- <li><span>Cantidad de Paginas:</span> <%= product.numberPages %>
+                        </li>
+                        <li><span>Editorial:</span> <%= product.editorial %>
+                        </li> -->
+                        <!-- <li>Año de lanzamiento:</li> -->
+                        <li><span>Autor:</span> <%= product.autor.nombre %>
+                        </li> 
+                        <li><span>Género:</span> <%= `${product.genero.nombre.charAt(0).toUpperCase() + product.genero.nombre.slice(1).toLowerCase()}` %>
+
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        <%- include('partials/footer') %>
+</body>
+
+</html>
